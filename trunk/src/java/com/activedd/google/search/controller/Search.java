@@ -18,13 +18,16 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
  * @author ibrahim
  */
 public class Search extends MultiActionController {
+
     private String searchKey;
     private String APIKey;
+    private String positiveWords;
+    private String negativeWords;
 
     public void search(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
         response.setContentType("text/html;charset=UTF-8");
-        SearchAnalysis search = new SearchAnalysis();
-        JSONObject jSONObject = search.search(searchKey, APIKey,request.getParameter("q"));
+        SearchAnalysis search = new SearchAnalysis(positiveWords, negativeWords);
+        JSONObject jSONObject = search.search(searchKey, APIKey, request.getParameter("q"));
         jSONObject.write(response.getWriter());
         response.getWriter().close();
 
@@ -42,5 +45,19 @@ public class Search extends MultiActionController {
      */
     public void setAPIKey(String APIKey) {
         this.APIKey = APIKey;
+    }
+
+    /**
+     * @param positiveWords the positiveWords to set
+     */
+    public void setPositiveWords(String positiveWords) {
+        this.positiveWords = positiveWords;
+    }
+
+    /**
+     * @param negativeWords the negativeWords to set
+     */
+    public void setNegativeWords(String negativeWords) {
+        this.negativeWords = negativeWords;
     }
 }

@@ -25,9 +25,16 @@ import org.json.JSONObject;
  */
 public class SearchAnalysis {
 
-    static String positiveWords[] = {"America", "great", "funny"};
-    static String negativeWords[] = {"bad", "stupid", "lazy"};
-    int negative = 0, positive = 0, neutral = 0;
+    String positiveWords[] ;
+    String negativeWords[] ;
+    private int negative = 0;
+    private int positive = 0;
+    private int neutral = 0;
+
+    public SearchAnalysis(String pWords,String nWords) {
+        this.positiveWords=pWords.split(",");
+        this.negativeWords=nWords.split(",");
+    }
     
 
     /**
@@ -39,7 +46,11 @@ public class SearchAnalysis {
         try {
             int start = 1;
             for (int j = 0; j < 10; j++) {
+                
                 String link = "https://www.googleapis.com/customsearch/v1?key=" + APIKey + "&cx=" + searchKey + "&q="+query+"&start=" + start;
+//                if(j==0){
+//                    jSONObject.put("link", link);
+//                }
                 getLinkContent(link);
                 start += 10;
             }
@@ -48,6 +59,8 @@ public class SearchAnalysis {
             jSONObject.put("negative", negative);
             jSONObject.put("neutral", neutral);
             jSONObject.put("time", new Date(now.getTime() - d.getTime()).getSeconds());
+            jSONObject.put("#postive", positiveWords.length);
+            jSONObject.put("#negative", negativeWords.length);
         } catch (Exception ex) {
             jSONObject.put("error", ex.getMessage());
         } finally {

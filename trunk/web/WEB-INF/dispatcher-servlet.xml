@@ -44,6 +44,7 @@
     <bean name="Search" class="com.activedd.google.search.controller.Search" >
           <property name="aPIKey" value="${search.apikey}"/>
           <property name="searchKey" value="${search.searchKey}"/>
-
+          <property name="positiveWords" value="${search.positivewords}"/>
+          <property name="negativeWords" value="${search.negativewords}"/>
     </bean>
 </beans>
