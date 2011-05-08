@@ -21,12 +21,12 @@ search={
             }
         }
         search.initValues();
-        for(i=0;i<10;i++){
+        /*for(i=0;i<10;i++){
             search.createScriptLink(apikey,searchKey,query,start);
             start+=10;
-        }
+        }*/
 
-     //search.searchResults(searchResults);
+     search.searchResults(searchResults);
     },
     initValues:function(){
         neutralResults=[];
@@ -56,7 +56,7 @@ search={
         return false;
     },
     searchResults:function(response){
-        console.log(new Date().getTime());
+        //console.log(new Date().getTime());
         var d=new Date();
         for (var i = 0; i < response.items.length; i++) {
             var title = response.items[i]["snippet"].toLowerCase();
@@ -80,8 +80,8 @@ search={
         var now=new Date();
         var eshta=new Date(now.getTime()-d.getTime());
         time+=eshta.getSeconds();
-        $("#time").html(time)
-        console.log(new Date().getTime());
+        $("#time").html(time);
+        //console.log(new Date().getTime());
 
     },
     createScriptLink:function(APIKey,searchKey,query,start){
