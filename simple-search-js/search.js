@@ -6,7 +6,7 @@
 
 search={
     search:function(){
-        var query =$("q").val();
+        var query =$("#q").val();
         var searchKey="";
         var selection= $("input[@name=category]:checked").val();
         if(selection=="facebook"){
@@ -20,6 +20,9 @@ search={
                 searchKey=allkey
             }
         }
+        neutralResults=[];
+        positiveResults=[];
+        negativeResults=[];
         for(i=0;i<=10;i++){
             if(i==10){
                 start=0;
@@ -90,9 +93,24 @@ search={
         
     },
     showResults:function(){
-        neutralResults=[];
-        positiveResults=[];
-        negativeResults=[];
+        search.insertArrayIntoTable(positiveResults,"link-pos");
+        search.insertArrayIntoTable(negativeResults,"link-neg");
+        search.insertArrayIntoTable(neutralResults,"link-ne");
+    },
+    insertArrayIntoTable:function(array,name){
+        var out="";
+        out+="<table border='2'>";
+        for(i=0;i<array.length;i++){
+            out+="<tr><td>";
+            out+="<h1><a href="+array[i].link+">"+array[i].htmlTitle+"</a></h1><br/>";
+            out+=array[i].htmlSnippet;
+            out+="</td></tr>";
+        }
+        out+="</table>"
+        $("#"+name).html(out);
     }
 }
+                    
+
+
 
