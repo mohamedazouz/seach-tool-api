@@ -20,22 +20,24 @@ search={
                 searchKey=allkey
             }
         }
+        search.initValues();
+        /*for(i=0;i<10;i++){
+            search.createScriptLink(apikey,searchKey,query,start);
+            start+=10;
+        }*/
+
+        search.searchResults(searchResults);
+    },
+    initValues:function(){
         neutralResults=[];
         positiveResults=[];
         negativeResults=[];
-        for(i=0;i<=10;i++){
-            if(i==10){
-                start=0;
-                negative=0
-                positive=0
-                neutral=0;
-                break;
-            }
-            search.createScriptLink(apikey,searchKey,query,start);
-            start+=10;
-        }
-        
-    },
+        start=1;
+        negative=0
+        positive=0
+        neutral=0;
+    }
+    ,
     searchNegativeStatment:function( phrase) {
         for (word in negativeWords) {
             if (phrase.indexOf(negativeWords[word].toLowerCase())!=-1) {
@@ -99,7 +101,7 @@ search={
     },
     insertArrayIntoTable:function(array,name){
         var out="";
-        out+="<table border='2'>";
+        out+="<table>";
         for(i=0;i<array.length;i++){
             out+="<tr><td>";
             out+="<h1><a href="+array[i].link+">"+array[i].htmlTitle+"</a></h1><br/>";
