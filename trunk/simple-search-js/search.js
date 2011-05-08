@@ -21,12 +21,12 @@ search={
             }
         }
         search.initValues();
-        /*for(i=0;i<10;i++){
+        for(i=0;i<10;i++){
             search.createScriptLink(apikey,searchKey,query,start);
             start+=10;
-        }*/
+        }
 
-        search.searchResults(searchResults);
+     //search.searchResults(searchResults);
     },
     initValues:function(){
         neutralResults=[];
@@ -95,24 +95,56 @@ search={
         
     },
     showResults:function(){
-        search.insertArrayIntoTable(positiveResults,"link-pos");
+        /*search.insertArrayIntoTable(positiveResults,"link-pos");
         search.insertArrayIntoTable(negativeResults,"link-neg");
-        search.insertArrayIntoTable(neutralResults,"link-ne");
+        search.insertArrayIntoTable(neutralResults,"link-ne");*/
+        search.insertArrayIntoTable("","");
     },
     insertArrayIntoTable:function(array,name){
         var out="";
-        out+="<table>";
-        for(i=0;i<array.length;i++){
-            out+="<tr><td>";
-            out+="<h1><a href="+array[i].link+">"+array[i].htmlTitle+"</a></h1><br/>";
-            out+=array[i].htmlSnippet;
-            out+="</td></tr>";
+      /*  for(i=0;i<array.length;i++){
+            out+="<div class='search-links'>";
+            out+="<b><a href="+array[i].link+">"+array[i].htmlTitle+"</a></b><br/>";
+            out+="<div>"+array[i].htmlSnippet+"</div>";
+            out+="</div>";
+        }*/
+        var tableSize=Math.max(positiveResults.length,Math.max(negativeResults.length,neutralResults.length));
+        for(i=0;i<tableSize;i++){
+            //postive
+            out+="<tr>"
+            if(positiveResults[i]){
+                out+="<td width='300px'>"
+                out+="<div>";
+                out+="<b><a href="+positiveResults[i].link+">"+positiveResults[i].htmlTitle+"</a></b><br/>";
+                out+="<div>"+positiveResults[i].htmlSnippet+"</div>";
+                out+="</div>";
+                out+="</td>"
+            }else{
+                out+="<td width='300px'></td>"
+            }
+            if(negativeResults[i]){
+                out+="<td width='300px'>"
+                out+="<div>";
+                out+="<b><a href="+negativeResults[i].link+">"+negativeResults[i].htmlTitle+"</a></b><br/>";
+                out+="<div>"+negativeResults[i].htmlSnippet+"</div>";
+                out+="</div>";
+                out+="</td>"
+            }else{
+                out+="<td width='300px'></td>"
+            }
+            if(neutralResults[i]){
+                out+="<td  width='300px'>"
+                out+="<div >";
+                out+="<b><a href="+neutralResults[i].link+">"+neutralResults[i].htmlTitle+"</a></b><br/>";
+                out+="<div>"+neutralResults[i].htmlSnippet+"</div>";
+                out+="</div>";
+                out+="</td>"
+            }else{
+                out+="<td width='300px'></td>"
+            }
+            out+="</tr>"
+            
         }
-        out+="</table>"
-        $("#"+name).html(out);
+        $("#linksResults").html(out);
     }
 }
-                    
-
-
-

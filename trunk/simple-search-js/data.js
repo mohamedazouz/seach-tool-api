@@ -8,11 +8,16 @@ var negativeWords = ["bad", "stupid", "lazy","idiot","fuck","shit","incredable",
 var negative=0,positive=0,neutral=0;
 var time=0;
 var start=1;
-var allkey="006193276902692689241:sbmg9r8ii5c"
-var apikey="AIzaSyDkFRCzCSJDlgvK0GV0QT-0anvE1brL55A"
-var facebookkey="006193276902692689241:vxiqgwuttsq"
-var twitterkey="006193276902692689241:nlgratbhona"
+//var allkey="006193276902692689241:sbmg9r8ii5c"
+//var apikey="AIzaSyAu4ToDDQZvISG0ZMO8PEyRw5xk6UyOAKI"
+//var facebookkey="006193276902692689241:vxiqgwuttsq"
+//var twitterkey="006193276902692689241:nlgratbhona"
+var allkey="006548529825748814864:wisi6or1kpo"
+var apikey="AIzaSyD7AthUC-gi0KCcXrCb93PEjHfTYgK2LaU"
+var facebookkey="006548529825748814864:ypu4j_48vzc"
+var twitterkey="006548529825748814864:ql7ox0ipmk0"
 
 var positiveResults=[];
 var negativeResults=[];
 var neutralResults=[];
+var crefLink="http://local.activedd.com/azouz/cref.xml";
