@@ -21,12 +21,12 @@ search={
             }
         }
         search.initValues();
-        /*for(i=0;i<10;i++){
+        for(i=0;i<10;i++){
             search.createScriptLink(apikey,searchKey,query,start);
             start+=10;
-        }*/
+        }
 
-     search.searchResults(searchResults);
+     //search.searchResults(searchResults);
     },
     initValues:function(){
         neutralResults=[];
