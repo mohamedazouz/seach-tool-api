@@ -8,6 +8,12 @@
         <script type="text/javascript" src="jquery.js"></script>
         <script type="text/javascript" src="search.js"></script>
         <script type="text/javascript" src="data.js"></script>
+        <script type="text/javascript" src="template.js"></script>
+        <style type="text/css">
+            <!--
+            @import url("style.css");
+            -->
+        </style>
     </head>
     <body>
         <div id="searcharea">
@@ -25,6 +31,19 @@
         </table>
         <button onclick="search.showResults()">show</button>
         <table id="linksResults">
+            <thead>
+                <tr>
+                    <th class="odd">
+                        Positive Links
+                    </th>
+                    <th class="odd">
+                        Negative Links
+                    </th>
+                    <th class="odd">
+                        Neutral Links
+                    </th>
+                </tr>
+            </thead>
             <tr>
                 <td id="link-pos">
                 </td>
