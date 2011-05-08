@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <title></title>
+
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="search.js"></script>
+        <script type="text/javascript" src="data.js"></script>
+    </head>
+    <body>
+        <div id="searcharea">
+            Write Your Query<input type="text" id="q"><br/>
+            All <input type="radio" value="all"  name="category" checked><br/>
+            Facebook <input type="radio" value="facebook" name="category" ><br/>
+            Twitter <input type="radio" value="twitter" name="category"><br/>
+            <button onclick="search.search()">Search</button>
+        </div>
+        <table id="resuts">
+            <tr><td>Positive</td><td id="pos"></td></tr>
+            <tr><td>Negative</td><td id="neg"></td></tr>
+            <tr><td>Neutral</td><td id="ne"></td></tr>
+            <tr><td>Time</td><td id="time"></td></tr>
+        </table>
+    </body>
+</html>
+
+
+
+<!--Oabama
+Positive	289
+Negative	15
+Neutral	606
+
+
+
+Positive	285
+Negative	18
+Neutral	607
+Time	0
+Oabama Positive	289 Negative	15 Neutral	606 Time-->
