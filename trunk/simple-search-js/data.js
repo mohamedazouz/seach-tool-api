@@ -8,10 +8,10 @@ var negativeWords = ["bad", "stupid", "lazy","idiot","fuck","shit","incredable",
 var negative=0,positive=0,neutral=0;
 var time=0;
 var start=1;
-var allkey="005134231846224531950:cqd7ab8f19s"
-var apikey="AIzaSyCE_oc6roVsTz-ahkUUyfC_P2g1SSXdL6M"
-var facebookkey="005134231846224531950:-_vmtzrx-ew"
-var twitterkey="005134231846224531950:cw4j56k0sr8"
+var allkey="006548529825748814864:wisi6or1kpo"
+var apikey="AIzaSyCK2tCHU75RMCeSV4qMMNpzhh5LuyZIFBc"
+var facebookkey="006548529825748814864:ypu4j_48vzc"
+var twitterkey="006548529825748814864:ql7ox0ipmk0"
 
 var positiveResults=[];
 var negativeResults=[];
