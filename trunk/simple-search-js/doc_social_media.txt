@@ -1,0 +1,14 @@
+google.com
+-worst because it just get links to the page which contain the post we are targeting
+-it reflect in correct data and it useless to get what we are looking for .
+socialmention.com
+-they best till now because they research across 80 social networks and it can get more than 1000 result per query depending on it
+-we can use its api better than google because its reflect real data which we need.
+-if we ca pay i think we can contact it because it return what we are targeting .
+whostalkin.com =>  http://api.whostalkin.com/
+-waiting api key !!
+
+
+
+ideas
+-http://i-sieve.com/
