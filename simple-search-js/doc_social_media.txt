@@ -8,7 +8,17 @@ socialmention.com
 whostalkin.com =>  http://api.whostalkin.com/
 -waiting api key !!
 
-
+social media search from
+-facebook,twitter.... concatenate results and get what we want
+facebook
+-graph api seach //https://graph.facebook.com/search?until=yesterday&q=orange&access_token=2227470867|2.BtMnfE13Wrg9xSDbiiaFag__.3600.1305201600.0-1198560721|9hWPLJeFhPhqaqvhxikpmAhrmSM
+-it enable us to get all posts in facebook and what people say and how many likes this query get
+-peoples which subscribe in this query. in likes or comments
+-its freeeeeeeeee.
+twitter //http://search.twitter.com/search.json?callback=foo&q=twitter ,http://search.twitter.com/api/
+-i can get all source including all #tags + people who contribute search results.
+linkedin
+-Deprecated Search API :( just i can search for people no thing more
 
 ideas
 -http://i-sieve.com/

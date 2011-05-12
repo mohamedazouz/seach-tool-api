@@ -21,12 +21,12 @@ search={
             }
         }
         search.initValues();
-        for(i=0;i<10;i++){
+        /*for(i=0;i<10;i++){
             search.createScriptLink(apikey,searchKey,query,start);
             start+=10;
-        }
+        }*/
 
-     //search.searchResults(searchResults);
+     search.searchResults(searchResults);
     },
     initValues:function(){
         neutralResults=[];
@@ -112,6 +112,7 @@ search={
         for(i=0;i<tableSize;i++){
             //postive
             out+="<tr>"
+            out+="<td>"+(i+1)+"</td>"
             if(positiveResults[i]){
                 out+="<td width='300px'>"
                 out+="<div>";

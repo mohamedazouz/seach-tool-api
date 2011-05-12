@@ -1,0 +1,67 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="jquery.js"></script>
+        <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js" ></script>
+        <script>
+            token={"access_token":"127410177333318|879677f993bcba435903bd52.1-1198560721|yqQfhFwSpKvc06_1VoJ_bDXsXps"}
+            
+            function get(flid,name){
+                /* FB.api(
+                {
+                    method: 'fql.query',
+                    query: 'SELECT uid, name, pic_square,online_presence FROM user WHERE online_presence IN ("active","idle") uid ='+flid,
+                    access_token:token.access_token
+                },
+                function(data) {
+                    alert(JSON.stringify(data))
+                }
+            );*/
+                //alert(flid)
+                var x=flid;
+                var query = FB.Data.query('SELECT  uid, name, pic_square,online_presence  FROM user WHERE uid = {0}',x);
+                query.wait(function(rows) {
+                    alert('Your name is ' + rows[0].name);
+                });
+
+            }
+            FB.api('/me/friends',{
+                access_token:session_key//new session key
+            }, function(data) {
+                //alert(JSON.stringify(data.data))
+                for(i=0;i<data.data.length;i++){
+                    var query = FB.Data.query('SELECT  uid, name, pic_square,online_presence  FROM user WHERE uid = {0}',x);
+                    query.wait(function(rows) {
+                        alert('Your name is ' + rows[0].name);
+                    });
+                }
+            })
+            /*var query = FB.Data.query('select name, uid from user where uid={0}',
+            "100002298398209");
+            query.wait(function(rows) {
+                alert('Your name is ' + rows[0].name);
+            });*/
+            /* FB.api(
+            {
+                method: 'fql.query',
+                query: 'SELECT flid,name FROM friendlist WHERE owner=me()',
+                access_token:token.access_token
+            },
+            function(data) {
+                for(i=0;i<data.length;i++){
+                    get(data[i].flid,data[i].name)
+                }
+            }
+        );*/
+        </script>
+    </head>
+    <body>
+        <div id="eshta"></div>
+    </body>
+</html>
