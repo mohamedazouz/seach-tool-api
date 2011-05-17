@@ -21,3 +21,11 @@ var positiveResults=[];
 var negativeResults=[];
 var neutralResults=[];
 var crefLink="http://local.activedd.com/azouz/cref.xml";
+
+token={
+    "access_token":"114676361948126|ea2d3d97a312d19e714cf71b.1-1198560721|mMeBiLLlSQBKm6hzm5NaizIQEAg"
+}
+var fabookData=[];
+
+var twitterSearchLink="http://search.twitter.com/search.json";
+var twitterData=[];

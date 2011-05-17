@@ -11,7 +11,7 @@ whostalkin.com =>  http://api.whostalkin.com/
 social media search from
 -facebook,twitter.... concatenate results and get what we want
 facebook
--graph api seach //https://graph.facebook.com/search?until=yesterday&q=orange&access_token=2227470867|2.BtMnfE13Wrg9xSDbiiaFag__.3600.1305201600.0-1198560721|9hWPLJeFhPhqaqvhxikpmAhrmSM
+-graph api seach //https://graph.facebook.com/search?until=yesterday&q=orange&access_token=114676361948126|ea2d3d97a312d19e714cf71b.1-1198560721|mMeBiLLlSQBKm6hzm5NaizIQEAg
 -it enable us to get all posts in facebook and what people say and how many likes this query get
 -peoples which subscribe in this query. in likes or comments
 -its freeeeeeeeee.
