@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 var totalQuery=0;
 var totalResults=0;
 searchTwitter={
@@ -15,27 +11,6 @@ searchTwitter={
         }
         searchTwitter.initValues();
         searchTwitter.createScriptLink("?callback=searchTwitter.searchResults&q="+query);
-    },
-    searchLoop:function(query){
-    //for all results
-    /*searchTwitter.getSearchResults(query,parameter,function(response){
-            if(response.data.length==0){
-                searchTwitter.searchResults(fabookData);
-                return;
-            }else{
-                //fabookData.push(response);
-
-                searchTwitter.searchResults(response)
-                parameter_=response.paging.next.substr(response.paging.next.indexOf("&callback"));
-                searchFacebook.searchLoop(query,parameter_);
-            }
-        });*/
-
-    /*searchTwitter.getSearchResults(query,parameter,function(response){
-            searchTwitter.searchResults(response)
-            $("#wait").hide();
-        });*/
-
     },
     createScriptLink:function(query){
         container  = document.createElement('script');
@@ -56,14 +31,6 @@ searchTwitter={
         totalQuery=0;
         totalResults=0
     },
-    getSearchResults:function(q,parameter,callback){
-        //   alert(token.access_token)
-        FB.api("/search?q="+q+"&limit=500"+parameter,{
-            access_token:token.access_token
-        }, function(response) {
-            callback(response)
-        })
-    },
     searchNegativeStatment:function( phrase) {
         for (word in negativeWords) {
             if (phrase.indexOf(negativeWords[word].toLowerCase())!=-1) {
@@ -74,7 +41,6 @@ searchTwitter={
     },
     searchPositiveStatment:function(phrase) {
         for (word in positiveWords) {
-            //alert(positiveWords[word].toLowerCase())
             if (phrase.indexOf(positiveWords[word].toLowerCase())!=-1) {
                 return true;
             }
@@ -86,7 +52,6 @@ searchTwitter={
         totalResults+=response.results.length;
         for (var i = 0; i < response.results.length; i++) {
             var title = response.results[i]["text"];
-            //alert(title)
             if (searchTwitter.searchNegativeStatment(title)) {
                 negative++;
                 negativeResults.push(response.results[i]);
@@ -108,17 +73,11 @@ searchTwitter={
             searchTwitter.createScriptLink("?callback=searchTwitter.searchResults&"+parameter_);
             
         }else{
-           // alert("")
            $("#wait").hide();
            $("#totalResults").html(totalResults);
-            $("#pos").html(positive)
-            $("#neg").html(negative)
-            $("#ne").html(neutral)
-            var now=new Date();
-            var eshta=new Date(now.getTime()-d.getTime());
-            var time=0;
-            time+=eshta.getSeconds();
-            $("#time").html(time);
+            $("#pos").html(positive);
+            $("#neg").html(negative);
+            $("#ne").html(neutral);
         }
     },
     showResults:function(){
@@ -165,4 +124,3 @@ searchTwitter={
         return out;
     }
 }
-

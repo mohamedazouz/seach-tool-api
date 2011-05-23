@@ -1,12 +1,3 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 searchFacebook={
     search:function(){
         $("#wait").show();
@@ -53,7 +44,6 @@ searchFacebook={
         neutral=0;
     },
     getSearchResults:function(q,parameter,callback){
-        //   alert(token.access_token)
         FB.api("/search?q="+q+"&limit=500"+parameter,{
             access_token:token.access_token
         }, function(response) {
@@ -70,7 +60,6 @@ searchFacebook={
     },
     searchPositiveStatment:function(phrase) {
         for (word in positiveWords) {
-            //alert(positiveWords[word].toLowerCase())
             if (phrase.indexOf(positiveWords[word].toLowerCase())!=-1) {
                 return true;
             }
@@ -78,11 +67,6 @@ searchFacebook={
         return false;
     },
     searchResults:function(response){
-        //  alert("eshta ya pashaaaaaa");
-
-        //alert(response[0].data[0])
-        //title=response[0].data[0]["message"].toLowerCase();
-        //console.log(new Date().getTime());
         var d=new Date();
         for (var i = 0; i < response.data.length; i++) {
             var title = "";
@@ -103,7 +87,6 @@ searchFacebook={
                     }
                 }
             }
-            //alert(title)
             if (searchFacebook.searchNegativeStatment(title)) {
                 negative++;
                 negativeResults.push(response.data[i]);
@@ -121,12 +104,6 @@ searchFacebook={
         $("#pos").html(positive)
         $("#neg").html(negative)
         $("#ne").html(neutral)
-        var now=new Date();
-        var eshta=new Date(now.getTime()-d.getTime());
-        var time=0;
-        time+=eshta.getSeconds();
-        $("#time").html(time);
-    //console.log(new Date().getTime());
 
     },
     showResults:function(){
@@ -136,7 +113,6 @@ searchFacebook={
         var out="";
         var tableSize=Math.max(positiveResults.length,Math.max(negativeResults.length,neutralResults.length));
         for(i=0;i<tableSize;i++){
-            //postive
             out+="<tr>"
             out+="<td>"+(i+1)+"</td>"
             if(positiveResults[i]){
