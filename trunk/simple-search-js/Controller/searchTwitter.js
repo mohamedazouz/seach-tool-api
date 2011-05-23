@@ -2,7 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
+var totalQuery=0;
+var totalResults=0;
 searchTwitter={
     search:function(){
         $("#wait").show();
@@ -52,6 +53,8 @@ searchTwitter={
         negative=0
         positive=0
         neutral=0;
+        totalQuery=0;
+        totalResults=0
     },
     getSearchResults:function(q,parameter,callback){
         //   alert(token.access_token)
@@ -80,6 +83,7 @@ searchTwitter={
     },
     searchResults:function(response){
         var d=new Date();
+        totalResults+=response.results.length;
         for (var i = 0; i < response.results.length; i++) {
             var title = response.results[i]["text"];
             //alert(title)
@@ -98,18 +102,24 @@ searchTwitter={
 
         }
 
-        /*if(response.next_page){
-            parameter_=response.next_page.substr(response.next_page.indexOf("&max_id"));
-            searchTwitter.createScriptLink("?callback=searchTwitter.searchResults"+parameter_);
-        }*/
-        $("#pos").html(positive)
-        $("#neg").html(negative)
-        $("#ne").html(neutral)
-        var now=new Date();
-        var eshta=new Date(now.getTime()-d.getTime());
-        var time=0;
-        time+=eshta.getSeconds();
-        $("#time").html(time);
+        if(response.next_page&&(totalQuery<=50)){
+            totalQuery++;
+            var parameter_=response.next_page.substr(1);
+            searchTwitter.createScriptLink("?callback=searchTwitter.searchResults&"+parameter_);
+            
+        }else{
+           // alert("")
+           $("#wait").hide();
+           $("#totalResults").html(totalResults);
+            $("#pos").html(positive)
+            $("#neg").html(negative)
+            $("#ne").html(neutral)
+            var now=new Date();
+            var eshta=new Date(now.getTime()-d.getTime());
+            var time=0;
+            time+=eshta.getSeconds();
+            $("#time").html(time);
+        }
     },
     showResults:function(){
         searchTwitter.insertArrayIntoTable();
@@ -150,7 +160,7 @@ searchTwitter={
     print:function(type,response){
         var out="<div>";
         out+="<a href='http://www.twitter.com/"+response.from_user+"'><img src='"+response.profile_image_url+"'/></a><br>"
-        out+="<b><a href="+response.source+">"+response.text+"</a></b><br/>";
+        out+="<b>"+response.text+"</a>";
         out+="</div>";
         return out;
     }

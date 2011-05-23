@@ -35,7 +35,8 @@ searchFacebook={
         });*/
         
         searchFacebook.getSearchResults(query,parameter,function(response){
-            searchFacebook.searchResults(response)
+            searchFacebook.searchResults(response);
+            $("#totalResults").html(response.data.length);
             $("#wait").hide();
         });
 
@@ -166,6 +167,7 @@ searchFacebook={
     },
     print:function(type,response){
         var out="<div>";
+        
         if(type=="status"){
             out+="<b>"+response.type+"</b><br/>";
             out+="<b>"+response.message;
@@ -173,9 +175,9 @@ searchFacebook={
         }else
             {
                 out+="<img src='"+response.icon+"'/>&nbsp;&nbsp;&nbsp"
-        out+="<a href="+response.link+"><b>"+response.type+"</b></a><br/>";
+                 out+="<a href="+response.link+"><b>"+response.type+"</b></a><br/>";
             }
-        
+        out+="<br>From User &nbsp;: &nbsp;&nbsp;  <a href='http://www.facebook.com/profile.php?id="+response.from.id+"'>"+response.from.name+"</a><br>";
         if(type=="video" || type=="link"){
             temp=""
             if(response.message){
