@@ -143,8 +143,7 @@ searchFacebook={
         
         if(type=="status"){
             out+="<b>"+response.type+"</b><br/>";
-            out+="<b>"+response.message;
-            +"</b><br/>";
+            out+="<b><a href='http://www.facebook.com/permalink.php?story_fbid="+response.id.split("_")[1]+"&id="+response.id.split("_")[0]+"'>"+response.message+"</a></b><br/>";
         }else
             {
                 out+="<img src='"+response.icon+"'/>&nbsp;&nbsp;&nbsp"
@@ -156,15 +155,15 @@ searchFacebook={
             if(response.message){
                 temp=response.message;
             }
-            out+="<b>"+temp+"</b><br/>";
-            out+="<div>"+response.description+"</div>";
+            out+="<b><a href='http://www.facebook.com/permalink.php?story_fbid="+response.id.split("_")[1]+"&id="+response.id.split("_")[0]+"'>"+temp+"</a></b><br/>";;
+            out+=response.description;
         }
         if(type=="photo"){
             temp="";
             if(response.caption){
                 temp=response.caption;
             }
-            out+="<b>"+temp+"</a></b><br/>";
+            out+="<b><a href='http://www.facebook.com/permalink.php?story_fbid="+response.id.split("_")[1]+"&id="+response.id.split("_")[0]+"'>"+temp+"</a></b><br/>";
             temp="";
             if(response.description){
                 temp=response.description;
