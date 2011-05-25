@@ -1,16 +1,18 @@
-var totalQuery=0;
+var entiredQuery="";
 var totalResults=0;
-searchTwitter={
+var pages_index=1;
+searchBlog={
     search:function(){
         $("#wait").show();
         var query =$("#q").val();
         var searchKey="";
-        searchTwitter.initValues();
-        searchTwitter.createScriptLink("?callback=searchTwitter.searchResults&q="+query);
+        searchBlog.initValues();
+        entiredQuery=query;
+        searchBlog.createScriptLink("&callback=searchBlog.searchResults&q="+query);
     },
     createScriptLink:function(query){
         container  = document.createElement('script');
-        link= twitterSearchLink + query;
+        link= blogSearchLink + query;
         container.setAttribute("src",link);
         document.body.appendChild(container);
 
@@ -25,7 +27,9 @@ searchTwitter={
         positive=0
         neutral=0;
         totalQuery=0;
-        totalResults=0
+        totalResults=0;
+        entiredQuery="";
+        pages_index=1;
     },
     searchNegativeStatment:function( phrase) {
         for (word in negativeWords) {
@@ -45,40 +49,40 @@ searchTwitter={
     },
     searchResults:function(response){
         var d=new Date();
-        totalResults+=response.results.length;
-        for (var i = 0; i < response.results.length; i++) {
-            var title = response.results[i]["text"];
-            if (searchTwitter.searchNegativeStatment(title)) {
+        totalResults+=response.responseData.results.length;
+        for (var i = 0; i < response.responseData.results.length; i++) {
+            var title = response.responseData.results[i]["content"];
+            if (searchBlog.searchNegativeStatment(title)) {
                 negative++;
-                negativeResults.push(response.results[i]);
+                negativeResults.push(response.responseData.results[i]);
             } else {
-                if (searchTwitter.searchPositiveStatment(title)) {
+                if (searchBlog.searchPositiveStatment(title)) {
                     positive++;
-                    positiveResults.push(response.results[i]);
+                    positiveResults.push(response.responseData.results[i]);
                 } else {
                     neutral++;
-                    neutralResults.push(response.results[i]);
+                    neutralResults.push(response.responseData.results[i]);
                 }
             }
 
         }
-
-        if(response.next_page&&(totalQuery<=50)){
-            totalQuery++;
-            var parameter_=response.next_page.substr(1);
-            searchTwitter.createScriptLink("?callback=searchTwitter.searchResults&"+parameter_);
-            
+        
+        if(response.responseData.cursor.pages&&response.responseData.cursor.pages[pages_index]){
+            page=response.responseData.cursor.pages[pages_index]
+            pages_index++;
+            parameter_="q="+entiredQuery+"&start="+page.start+"&label="+page.label;
+            searchBlog.createScriptLink("&callback=searchBlog.searchResults&"+parameter_);
         }else{
            $("#wait").hide();
            $("#totalResults").html(totalResults);
             $("#pos").html(positive);
             $("#neg").html(negative);
             $("#ne").html(neutral);
-            searchTwitter.showResults();
+            searchBlog.showResults();
         }
     },
     showResults:function(){
-        searchTwitter.insertArrayIntoTable();
+        searchBlog.insertArrayIntoTable();
     },
     insertArrayIntoTable:function(){
         var out="";
@@ -89,21 +93,21 @@ searchTwitter={
             out+="<td>"+(i+1)+"</td>"
             if(positiveResults[i]){
                 out+="<td width='300px'>"
-                out+=searchTwitter.print(positiveResults[i].type,positiveResults[i])
+                out+=searchBlog.print(positiveResults[i])
                 out+="</td>"
             }else{
                 out+="<td width='300px'></td>"
             }
             if(negativeResults[i]){
                 out+="<td width='300px'>"
-                out+=searchTwitter.print(negativeResults[i].type,negativeResults[i])
+                out+=searchBlog.print(negativeResults[i])
                 out+="</td>"
             }else{
                 out+="<td width='300px'></td>"
             }
             if(neutralResults[i]){
                 out+="<td  width='300px'>"
-                out+=searchTwitter.print(neutralResults[i].type,neutralResults[i])
+                out+=searchBlog.print(neutralResults[i])
                 out+="</td>"
             }else{
                 out+="<td width='300px'></td>"
@@ -113,10 +117,11 @@ searchTwitter={
         }
         $("#linksResults").html(out);
     },
-    print:function(type,response){
-        var out="<div>";
-        out+="<a href='http://www.twitter.com/"+response.from_user+"'><img src='"+response.profile_image_url+"'/></a><br>"
-        out+="<b>"+response.text+"</a>";
+    print:function(response){
+        out="<div>";
+        out+=" Blog Title <h3>"+response.title+"</h3>";
+        out+=" Blog Author <a href='"+response.blogUrl+"'>"+response.author+"</a><br/>";
+        out+="<a href='"+response.postUrl+"'>"+response.content+"</a><br/>";
         out+="</div>";
         return out;
     }

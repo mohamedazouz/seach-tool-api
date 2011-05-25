@@ -3,10 +3,6 @@ searchFacebook={
         $("#wait").show();
         var query =$("#q").val();
         var searchKey="";
-        var selection= $("input[@name=category]:checked").val();
-        if(selection=="facebook"){
-            searchKey=facebookkey
-        }
         searchFacebook.initValues();
         searchFacebook.searchLoop(query,"");
     },
@@ -29,6 +25,7 @@ searchFacebook={
             searchFacebook.searchResults(response);
             $("#totalResults").html(response.data.length);
             $("#wait").hide();
+            searchFacebook.showResults();
         });
 
     }
