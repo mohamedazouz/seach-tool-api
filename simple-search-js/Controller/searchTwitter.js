@@ -116,7 +116,7 @@ searchTwitter={
     print:function(type,response){
         var out="<div>";
         out+="<a href='http://www.twitter.com/"+response.from_user+"'><img src='"+response.profile_image_url+"'/></a><br>"
-        out+="<b>"+response.text+"</a>";
+        out+="<b><a href='http://twitter.com/"+response.from_user+"/status/"+response.id_str+"'>"+response.text+"</a></b>";
         out+="</div>";
         return out;
     }
