@@ -29,3 +29,4 @@ var fabookData=[];
 
 var twitterSearchLink="http://search.twitter.com/search.json";
 var twitterData=[];
+var blogSearchLink="https://ajax.googleapis.com/ajax/services/search/blogs?v=1.0";

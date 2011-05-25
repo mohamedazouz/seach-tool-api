@@ -22,3 +22,7 @@ linkedin
 
 ideas
 -http://i-sieve.com/
+
+blogs
+http://www.icerocket.com/c?p=api
+http://code.google.com/apis/blogsearch/v1/jsondevguide.html

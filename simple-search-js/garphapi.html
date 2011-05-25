@@ -9,9 +9,17 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="JS/jquery.js"></script>
         <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js" ></script>
+        
         <script>
+            function eshta(res){
+                //alert("hi")
+                alert(JSON.stringify(res))
+            }
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/services/search/blogs?v=1.0&q=obama&callback=eshta"></script>
+        <!--<script>
             token={"access_token":"127410177333318|879677f993bcba435903bd52.1-1198560721|yqQfhFwSpKvc06_1VoJ_bDXsXps"}
-            
+
             function get(flid,name){
                 /* FB.api(
                 {
@@ -59,9 +67,12 @@ and open the template in the editor.
                 }
             }
         );*/
-        </script>
+        </script>-->
     </head>
     <body>
-        <div id="eshta"></div>
+        
+        
+
+
     </body>
 </html>
