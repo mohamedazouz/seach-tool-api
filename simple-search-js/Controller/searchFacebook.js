@@ -145,23 +145,33 @@ searchFacebook={
             out+="<b>"+response.type+"</b><br/>";
             out+="<b><a href='http://www.facebook.com/permalink.php?story_fbid="+response.id.split("_")[1]+"&id="+response.id.split("_")[0]+"'>"+response.message+"</a></b><br/>";
         }else
-            {
-                out+="<img src='"+response.icon+"'/>&nbsp;&nbsp;&nbsp"
-                 out+="<a href="+response.link+"><b>"+response.type+"</b></a><br/>";
-            }
+        {
+            out+="<img src='"+response.icon+"'/>&nbsp;&nbsp;&nbsp"
+            out+="<a href="+response.link+"><b>"+response.type+"</b></a><br/>";
+        }
         out+="<br>From User &nbsp;: &nbsp;&nbsp;  <a href='http://www.facebook.com/profile.php?id="+response.from.id+"'>"+response.from.name+"</a><br>";
         if(type=="video" || type=="link"){
             temp=""
             if(response.message){
                 temp=response.message;
+            }else
+            {
+                temp="link";
             }
-            out+="<b><a href='http://www.facebook.com/permalink.php?story_fbid="+response.id.split("_")[1]+"&id="+response.id.split("_")[0]+"'>"+temp+"</a></b><br/>";;
-            out+=response.description;
+            out+="<b><a href='http://www.facebook.com/permalink.php?story_fbid="+response.id.split("_")[1]+"&id="+response.id.split("_")[0]+"'>"+temp+"</a></b><br/>";
+             temp="";
+            if(response.description){
+                temp=response.description;
+            }
+            out+=temp;
         }
         if(type=="photo"){
             temp="";
             if(response.caption){
                 temp=response.caption;
+            }else
+            {
+                temp="link";
             }
             out+="<b><a href='http://www.facebook.com/permalink.php?story_fbid="+response.id.split("_")[1]+"&id="+response.id.split("_")[0]+"'>"+temp+"</a></b><br/>";
             temp="";
