@@ -48,20 +48,24 @@ searchFacebook={
         })
     },
     searchNegativeStatment:function( phrase) {
+        var prob=0;
         for (word in negativeWords) {
             if (phrase.indexOf(negativeWords[word].toLowerCase())!=-1) {
-                return true;
+                //return true;
+                prob++;
             }
         }
-        return false;
+        return prob;
     },
     searchPositiveStatment:function(phrase) {
+        var prob=0;
         for (word in positiveWords) {
             if (phrase.indexOf(positiveWords[word].toLowerCase())!=-1) {
-                return true;
+                //return true;
+                prob++;
             }
         }
-        return false;
+        return prob;
     },
     searchResults:function(response){
         var d=new Date();
@@ -84,7 +88,21 @@ searchFacebook={
                     }
                 }
             }
-            if (searchFacebook.searchNegativeStatment(title)) {
+            negativeProb=searchFacebook.searchNegativeStatment(title);
+            positiveProb=searchFacebook.searchPositiveStatment(title);
+            if (negativeProb>positiveProb) {
+                negative++;
+                negativeResults.push(response.data[i]);
+            } else {
+                if (negativeProb<positiveProb) {
+                    positive++;
+                    positiveResults.push(response.data[i]);
+                } else {
+                    neutral++;
+                    neutralResults.push(response.data[i]);
+                }
+            }
+        /*if (searchFacebook.searchNegativeStatment(title)) {
                 negative++;
                 negativeResults.push(response.data[i]);
             } else {
@@ -95,7 +113,7 @@ searchFacebook={
                     neutral++;
                     neutralResults.push(response.data[i]);
                 }
-            }
+            }*/
             
         }
         $("#pos").html(positive)
@@ -159,7 +177,7 @@ searchFacebook={
                 temp="link";
             }
             out+="<b><a href='http://www.facebook.com/permalink.php?story_fbid="+response.id.split("_")[1]+"&id="+response.id.split("_")[0]+"'>"+temp+"</a></b><br/>";
-             temp="";
+            temp="";
             if(response.description){
                 temp=response.description;
             }
