@@ -9,69 +9,70 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="JS/jquery.js"></script>
         <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js" ></script>
-        
-        <script>
-            function eshta(res){
-                //alert("hi")
-                alert(JSON.stringify(res))
-            }
-        </script>
-        <script src="https://ajax.googleapis.com/ajax/services/search/blogs?v=1.0&q=obama&callback=eshta"></script>
-        <!--<script>
-            token={"access_token":"127410177333318|879677f993bcba435903bd52.1-1198560721|yqQfhFwSpKvc06_1VoJ_bDXsXps"}
 
-            function get(flid,name){
-                /* FB.api(
+
+        <script>
+            token={"access_token":"127410177333318|b7108180a43840ce27170a25.1-1198560721|exMFd0oi8aDMw3mPmP-JUamQkF4"}//azouz
+            //   token={"access_token":"127410177333318|b41a194651efdc771e9bc191.1-696821500|0qiIry4BLhw2VSzD8jHt35EgtlY"}//haway
+           //token={"access_token":"127410177333318|df4bc0bfd6863599569fa0be.1-100002298398209|xYGLIEhEcTvEL4S0uFN831jeqDQ"}//fbchat
+           //token={"access_token":"102201119868199|8d35f8c01381c715ede117c4.1-100001513410529|cJWhrjTYPuTxIFrRLnoNqUhtMKM"}//azouz
+            function getUser(callback){
+                FB.api('/me/friends',{
+                    access_token:token.access_token//new session key
+                }, function(data) {
+                    callback(data.data);
+                })
+            }
+
+            function getDetails(id,callback){
+                FB.api(
                 {
                     method: 'fql.query',
-                    query: 'SELECT uid, name, pic_square,online_presence FROM user WHERE online_presence IN ("active","idle") uid ='+flid,
+                    query: "SELECT uid,online_presence,name  FROM user WHERE  uid ="+id,
                     access_token:token.access_token
                 },
                 function(data) {
-                    alert(JSON.stringify(data))
-                }
-            );*/
-                //alert(flid)
-                var x=flid;
-                var query = FB.Data.query('SELECT  uid, name, pic_square,online_presence  FROM user WHERE uid = {0}',x);
-                query.wait(function(rows) {
-                    alert('Your name is ' + rows[0].name);
+                    callback(data);
                 });
+            }
+            var user =[];
+            var onlineuser =[];
+            var idleuser =[];
+            function getInfo(callback){
+                getUser(function(res){
+                    var online=0;
+                    for(i=0;i<res.length;i++){
+                        getDetails(res[i].id,function(res){
+                            user.push(res)
+                            if(res[0].online_presence=="active"){
+                                onlineuser.push(res)
+                                callback(++online)
+                            }
+                            if(res[0].online_presence=="idle"){
+                                idleuser.push(res)
+                            }
+                        });
+                    }
+                    
+                })
+            }
+            getInfo(function(online){
+                $("#online").html(online)
+                //$("#onlineuser").html(JSON.stringify(onlineuser))
+                //$("#idleuser").html(JSON.stringify(idleuser))
 
-            }
-            FB.api('/me/friends',{
-                access_token:session_key//new session key
-            }, function(data) {
-                //alert(JSON.stringify(data.data))
-                for(i=0;i<data.data.length;i++){
-                    var query = FB.Data.query('SELECT  uid, name, pic_square,online_presence  FROM user WHERE uid = {0}',x);
-                    query.wait(function(rows) {
-                        alert('Your name is ' + rows[0].name);
-                    });
-                }
+                                $("#name").html(JSON.stringify(user));
             })
-            /*var query = FB.Data.query('select name, uid from user where uid={0}',
-            "100002298398209");
-            query.wait(function(rows) {
-                alert('Your name is ' + rows[0].name);
-            });*/
-            /* FB.api(
-            {
-                method: 'fql.query',
-                query: 'SELECT flid,name FROM friendlist WHERE owner=me()',
-                access_token:token.access_token
-            },
-            function(data) {
-                for(i=0;i<data.length;i++){
-                    get(data[i].flid,data[i].name)
-                }
-            }
-        );*/
-        </script>-->
+        </script>
     </head>
     <body>
-        
-        
+        <div id="online"></div>
+        <div id="onlineuser"></div>
+
+        <div id="idleuser"></div>
+
+
+        <div id="name"></div>
 
 
     </body>

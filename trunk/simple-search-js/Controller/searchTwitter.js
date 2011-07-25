@@ -28,27 +28,63 @@ searchTwitter={
         totalResults=0
     },
     searchNegativeStatment:function( phrase) {
+        var prob=0;
         for (word in negativeWords) {
             if (phrase.indexOf(negativeWords[word].toLowerCase())!=-1) {
-                return true;
+                 prob++;
+                //return true;
             }
         }
-        return false;
+        return prob;
     },
     searchPositiveStatment:function(phrase) {
+        var prob=0;
         for (word in positiveWords) {
             if (phrase.indexOf(positiveWords[word].toLowerCase())!=-1) {
-                return true;
+                //return true;
+                prob++;
             }
         }
-        return false;
+        return prob;
     },
     searchResults:function(response){
         var d=new Date();
+        /*  negativeProb = searchTwitter.searchNegativeStatment(title);
+            positiveProb =searchTwitter.searchPositiveStatment(title);
+            if(positiveProb>negativeProb){
+                positive++;
+                positiveResults.push(response.results[i]);
+            }else
+            {
+                if(positiveProb<negativeProb){
+                    negative++;
+                    negativeResults.push(response.results[i]);
+                }else
+                {
+                    neutral++;
+                    neutralResults.push(response.results[i]);
+                }
+            }*/
         totalResults+=response.results.length;
         for (var i = 0; i < response.results.length; i++) {
             var title = response.results[i]["text"];
-            if (searchTwitter.searchNegativeStatment(title)) {
+            negativeProb = searchTwitter.searchNegativeStatment(title);
+            positiveProb =searchTwitter.searchPositiveStatment(title);
+            if(positiveProb>negativeProb){
+                positive++;
+                positiveResults.push(response.results[i]);
+            }else
+            {
+                if(positiveProb<negativeProb){
+                    negative++;
+                    negativeResults.push(response.results[i]);
+                }else
+                {
+                    neutral++;
+                    neutralResults.push(response.results[i]);
+                }
+            }
+        /*  if (searchTwitter.searchNegativeStatment(title)) {
                 negative++;
                 negativeResults.push(response.results[i]);
             } else {
@@ -59,7 +95,7 @@ searchTwitter={
                     neutral++;
                     neutralResults.push(response.results[i]);
                 }
-            }
+            }*/
 
         }
 
@@ -69,8 +105,8 @@ searchTwitter={
             searchTwitter.createScriptLink("?callback=searchTwitter.searchResults&"+parameter_);
             
         }else{
-           $("#wait").hide();
-           $("#totalResults").html(totalResults);
+            $("#wait").hide();
+            $("#totalResults").html(totalResults);
             $("#pos").html(positive);
             $("#neg").html(negative);
             $("#ne").html(neutral);
@@ -121,3 +157,19 @@ searchTwitter={
         return out;
     }
 }
+
+/*
+ *
+ *TOTAL RESULTS Per Page	176
+Positive	150
+Negative	24
+Neutral	2
+
+ **/
+
+
+/*TOTAL RESULTS Per Page	176
+Positive	155
+Negative	3
+Neutral	18
+*/
