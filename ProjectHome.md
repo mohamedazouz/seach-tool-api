@@ -1,0 +1,1 @@
+it analysis search and get positive , negative and neutral results from the search
